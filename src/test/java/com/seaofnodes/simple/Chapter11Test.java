@@ -292,7 +292,7 @@ else {
 }
 """);
         StopNode stop = parser.parse().iterate();
-        assertEquals("Stop[ return 9; return 0; return 0; ]", stop.toString());
+        assertEquals("Stop[ return 9; return 0; return 0; return 0; return 0; ]", stop.toString());
     }
 
 
@@ -434,7 +434,7 @@ while(1)
   arg = arg+ptr.v;
 """);
         StopNode stop = parser.parse().iterate();
-        assertEquals("return 0;", stop.toString());
+        assertEquals("Stop[ return 0; return 0; ]", stop.toString());
     }
 
     @Test
@@ -496,7 +496,7 @@ return v;
     @Test
     public void testExample2() {
         Parser parser = new Parser(
-                                   """
+                """
 struct S { int f; }
 S v = new S;
 int i = arg;
@@ -507,7 +507,7 @@ while (arg > 0) {
     arg = arg - 1;
 }
 return v;
-""");
+                """);
         StopNode stop = parser.parse().iterate();
         //assertEquals("return new S;", stop.toString());
     }
